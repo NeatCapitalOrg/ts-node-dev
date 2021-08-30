@@ -235,13 +235,13 @@ export const makeCompiler = (
     },
     compile: function (params: CompileParams) {
       const compiledPath = params.compiledPath
-      
+
       // Prevent occasional duplicate compilation requests
       if (compiledPathsHash[compiledPath]) {
         return
-      }      
+      }
       compiledPathsHash[compiledPath] = true
-      
+
       function writeCompiled(code: string, fileName?: string) {
         fs.writeFile(compiledPath, code, (err) => {
           err && log.error(err)
@@ -257,7 +257,6 @@ export const makeCompiler = (
       const starTime = new Date().getTime()
 
       const fileName = params.compile
-      const code = params.code || fs.readFileSync(fileName, 'utf-8')
       const m: any = {
         _compile: writeCompiled,
       }
