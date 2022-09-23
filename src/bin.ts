@@ -30,6 +30,8 @@ const tsNodeFlags = {
     'ignore',
     'ignore-diagnostics',
     'compiler-options',
+    'scopeDir',
+    'transpiler'
   ],
 }
 
@@ -58,6 +60,8 @@ type TSNodeOptions = {
   'transpile-only': boolean
   pretty: boolean
   scope: boolean
+  scopeDir: string,
+  transpiler: string
   'log-error': boolean
   'skip-project': boolean
   'skip-ignore': boolean
@@ -89,6 +93,7 @@ const devFlags = {
     'dir',
     'deps-level',
     'compile-timeout',
+    'shutdown-timeout',
     'ignore-watch',
     'interval',
     'debounce',
@@ -120,6 +125,7 @@ type DevOptions = {
   'error-recompile': boolean
   quiet: boolean
   'tree-kill': boolean
+  'shutdown-timeout': string
 }
 
 export type Options = {
@@ -138,6 +144,7 @@ const opts = minimist(devArgs, {
   },
   default: {
     fork: true,
+    ['shutdown-timeout']: '30000',
   },
   unknown: function (arg) {
     unknown.push(arg)
